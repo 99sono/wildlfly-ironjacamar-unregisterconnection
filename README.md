@@ -2,7 +2,8 @@
 
 ## Summary
 The issue is reported in jboss JIRA:
-(still to be opened) 
+https://issues.jboss.org/browse/WFLY-9542
+
 
 A study was conducted to try to understand what was happening - or leading to - the occurence of the 
 IJ000311: Throwable from unregister connection: java.lang.IllegalStateException: IJ000152: Trying to return an unknown connection: org.jboss.jca.adapters.jdbc.jdk7.WrappedConnectionJDK7@2021ff6.
