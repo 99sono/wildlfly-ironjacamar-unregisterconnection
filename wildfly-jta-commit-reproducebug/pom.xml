@@ -1,0 +1,116 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>wildfly-jta-commit-reproducebug</artifactId>
+    <packaging>war</packaging>
+    <name>wildfly-jta-commit-reproducebug</name>
+    <url>http://maven.apache.org</url>
+
+    <parent>
+        <groupId>sample.wildfly</groupId>
+        <artifactId>wildfly-jta-commit-root</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <build>
+        <finalName>wildfly-jta-commit-reproducebug</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>                      
+
+        <!-- This package contains classes associated to management of jdbc Connections e.g. org.jboss.jca.core.connectionmanager.ccm.CachedConnectionManagerImpl.unregisterConnection(CachedConnectionManagerImpl.java:408) 
+            at org.jboss.jca.core.connectionmanager.listener.TxConnectionListener.connectionClosed(TxConnectionListener.java:645) -->
+        <dependency>
+            <groupId>org.jboss.ironjacamar</groupId>
+            <artifactId>ironjacamar-core-impl</artifactId>
+            <version>1.4.6.Final</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.wildfly/wildfly-ejb3 -->
+        <dependency>
+            <groupId>org.wildfly</groupId>
+            <artifactId>wildfly-ejb3</artifactId>
+            <version>10.1.0.Final</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>sample.wildfly</groupId>
+            <artifactId>wildfly-jta-commit-entities</artifactId>
+        </dependency>
+
+        <!-- Use this to debug eclipselink in wildfly 10 -->
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink</artifactId>
+            <version>2.6.6.0.0.2</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Use this to debug wildfly integration with eclipselink -->
+        <dependency>
+            <groupId>org.wildfly</groupId>
+            <artifactId>jipijapa-eclipselink</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.wildfly</groupId>
+            <artifactId>wildfly-ejb-client-bom</artifactId>
+            <version>10.0.0.Final</version>
+            <type>pom</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.wildfly</groupId>
+            <artifactId>wildfly-client-all</artifactId>
+            <version>10.0.0.Final</version>
+            <scope>test</scope>
+            <optional>true</optional>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.activemq</groupId>
+                    <artifactId>artemis-commons</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.activemq</groupId>
+                    <artifactId>artemis-core-client</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.activemq</groupId>
+                    <artifactId>artemis-jms-client</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.activemq</groupId>
+                    <artifactId>artemis-hqclient-protocol</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId> org.slf4j</groupId>
+                    <artifactId>jcl-over-slf4j</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+
+    </dependencies>
+
+
+
+</project>

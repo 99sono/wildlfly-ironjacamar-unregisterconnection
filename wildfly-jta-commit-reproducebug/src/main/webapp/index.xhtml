@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ds="http://deltaspike.apache.org/jsf"
+    >
+    
+    <f:view transient="true" encoding="UTF-8" locale="en" contentType="text/html; charset=UTF-8">    
+        <h:head>
+            <title> JSF not needed</title>                        
+            <script type='text/javascript'>
+                //<![CDATA[
+                //]]>
+            </script>
+            <ds:windowId/>         
+        </h:head>
+        
+        <h:body onload="">       
+            
+                                
+           <h:form  id="InvokeSystemTests">           
+                <p:messages showDetail="true" showSummary="true"  autoUpdate="true" globalOnly="true" />
+                
+                <!-- Simple fire of jms message -->
+                <h:outputText value="Use this button as many times as desired to send messages to a JMS Queue 1. We can use this to check a booby trapped mdb blow up." />
+                <h:outputText value="&lt;br/&gt;" escape="false" />
+                <p:commandButton value="SimpleSendMessageToQueue" 
+                        id="SimpleSendMessageToQueue" 
+                        actionListener="#{systemTestBean.simpleSendJmsMessage}" styleClass="ui-priority-primary" />                                        
+                <h:outputText value="&lt;br/&gt;" escape="false" />
+           
+                <!-- Test A  is irrelevant -->
+                <h:outputText value="Use this button once an only once to populate the DB with some entities. Then it becomes useless." />
+                <h:outputText value="&lt;br/&gt;" escape="false" />
+                <p:commandButton value="InvokeTestA (Create Some database entities - required once)" 
+                        id="InvokeTestA" 
+                        actionListener="#{systemTestBean.triggerTestA}" styleClass="ui-priority-primary" />                                        
+                <h:outputText value="&lt;br/&gt;" escape="false" />               
+                        
+                  <!-- Test C Wildfly observe event -->
+                <h:outputText value="&lt;br/&gt;" escape="false" />
+                <h:outputText value="fireSomeEntityChangeAEvent Will modify an entity and fire an event A. This event will be observed and the observed will be working with a stale entity. Refresh is needed. It shows bug on widly onsucess handling. " escape="false" />
+                <h:outputText value="&lt;br/&gt;" escape="false" />
+                <p:commandButton value="fireSomeEntityChangeAEvent" 
+                        id="fireSomeEntityChangeAEvent" 
+                        actionListener="#{systemTestBean.fireSomeEntityChangeAEvent}" 
+                        styleClass="ui-priority-primary" />
+                <h:outputText value="&lt;br/&gt;" escape="false" />
+                <h:outputText value="&lt;br/&gt;" escape="false" />                        
+                        
+               <!--  Fire EVENT B. -->         
+               <h:outputText value="&lt;br/&gt;" escape="false" />
+               <h:outputText value="fireSomeEntityChangeBEvent Will modify an entity and fire an event B. This event will be observed but this time the transaction requires new will be set on the observer singleton. In this sample application the transaction context seem to be opened, in our application apprently it does not and we are forced to use the apporach of experiment A.  " escape="false" />
+               <h:outputText value="&lt;br/&gt;" escape="false" />
+               <p:commandButton value="fireSomeEntityChangeBEvent" 
+                        id="fireSomeEntityChangeBEvent" 
+                        actionListener="#{systemTestBean.fireSomeEntityChangeBEvent}" 
+                        styleClass="ui-priority-primary" />
+                        
+               
+                <!--  Fire EVENT C. -->         
+               <h:outputText value="&lt;br/&gt;" escape="false" />
+               <h:outputText value="fireSomeEntityChangeCEvent Will modify an entity and fire an event C. This event will be observed on transaction completion.  " escape="false" />
+               <h:outputText value="&lt;br/&gt;" escape="false" />
+               <p:commandButton value="fireSomeEntityChangeCEvent" 
+                        id="fireSomeEntityChangeCEvent" 
+                        actionListener="#{systemTestBean.fireSomeEntityChangeCEvent}" 
+                        styleClass="ui-priority-primary" />         
+                        
+                        
+              <!--  Fire EVENT D. -->         
+               <h:outputText value="&lt;br/&gt;" escape="false" />
+               <h:outputText value="fireSomeEntityChangeDEvent We divide the business logic in two steps. First we modify the entity second we fire the envent saying we modified the entity. The Page beans triggers the fire event call.  " escape="false" />
+               <h:outputText value="&lt;br/&gt;" escape="false" />
+               <p:commandButton value="fireSomeEntityChangeDEvent" 
+                        id="fireSomeEntityChangeDEvent" 
+                        actionListener="#{systemTestBean.fireSomeEntityChangeDEvent}" 
+                        styleClass="ui-priority-primary" />                   
+                        
+                        
+           </h:form>
+       </h:body> 
+    </f:view>
+</html>

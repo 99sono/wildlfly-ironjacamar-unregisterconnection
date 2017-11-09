@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wls:weblogic-ejb-jar xmlns:javaee="http://java.sun.com/xml/ns/javaee" xmlns:wls="http://xmlns.oracle.com/weblogic/weblogic-ejb-jar" xmlns:xml="http://www.w3.org/XML/1998/namespace"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.oracle.com/weblogic/weblogic-ejb-jar http://xmlns.oracle.com/weblogic/weblogic-ejb-jar/1.4/weblogic-ejb-jar.xsd">
+
+    
+    <wls:weblogic-enterprise-bean>
+        <wls:ejb-name>ReproduceBugMdb</wls:ejb-name>
+        <wls:message-driven-descriptor>
+            <wls:pool>
+                <wls:max-beans-in-free-pool>1</wls:max-beans-in-free-pool>
+                <wls:initial-beans-in-free-pool>1</wls:initial-beans-in-free-pool>
+            </wls:pool>
+            <wls:connection-factory-jndi-name>jms/NotificationConnectionFactory</wls:connection-factory-jndi-name>
+        </wls:message-driven-descriptor>
+    </wls:weblogic-enterprise-bean>      
+	
+    
+</wls:weblogic-ejb-jar>

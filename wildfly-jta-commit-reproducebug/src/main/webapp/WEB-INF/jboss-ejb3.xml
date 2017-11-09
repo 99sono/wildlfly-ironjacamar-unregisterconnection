@@ -1,0 +1,38 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<jboss:ejb-jar xmlns:jboss="http://www.jboss.com/xml/ns/javaee" xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:s="urn:security:1.1" xmlns:p="urn:ejb-pool:1.0"
+    xsi:schemaLocation="http://www.jboss.com/xml/ns/javaee http://www.jboss.org/j2ee/schema/jboss-ejb3-2_0.xsd http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/ejb-jar_3_1.xsd"
+    version="3.1" impl-version="2.0">
+    <enterprise-beans>
+
+        <message-driven>
+            <ejb-name>ReproduceIJ000311IssueMdb</ejb-name>        
+            <ejb-class>startupconnectionproblem.mdb.ReproduceIJ000311IssueMdb</ejb-class>
+            <resource-ref>
+                <res-ref-name>JmsXA</res-ref-name>
+                <res-type>javax.jms.ConnectionFactory</res-type>
+                <lookup-name>java:/JmsXA</lookup-name>
+            </resource-ref>
+            <activation-config>
+                <activation-config-property>
+                    <activation-config-property-name>maxSession</activation-config-property-name>
+                    <activation-config-property-value>1</activation-config-property-value>
+                </activation-config-property>
+                <activation-config-property>
+                    <activation-config-property-name>destinationLookup</activation-config-property-name>
+                    <activation-config-property-value>java:/queue/SampleQueue1</activation-config-property-value>
+                </activation-config-property>
+            </activation-config>
+        </message-driven>       
+    </enterprise-beans>
+       
+    
+
+
+    <assembly-descriptor>
+        <p:pool>
+            <ejb-name>*</ejb-name>
+            <p:bean-instance-pool-ref>mdb-strict-max-pool</p:bean-instance-pool-ref>
+        </p:pool>
+    </assembly-descriptor>
+</jboss:ejb-jar>

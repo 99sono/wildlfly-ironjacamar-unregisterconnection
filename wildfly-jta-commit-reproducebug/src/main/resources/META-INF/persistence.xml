@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+	<persistence-unit name="ContainerManagedXaPU" transaction-type="JTA">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>                
+		<jta-data-source>jdbc/SAMPLE_DS</jta-data-source>
+		<class>db.model.SomeEntity</class>   
+        <!-- jar-file>weblogic-jta-commit-entities.jar</jar-file-->
+        <!-- jar-file>../lib/weblogic-jta-commit-entities.jar</jar-file -->     
+		<properties>
+        
+        <property name="eclipselink.logging.logger" value="JavaLogger"/>
+		<property name="eclipselink.logging.level" value="FINE" />
+		<property name="eclipselink.logging.level.sql" value="FINE" />
+		<property name="eclipselink.logging.parameters" value="true" />		
+        
+		<property name="eclipselink.jdbc.sequence-connection-pool" value="true" />
+		<property name="eclipselink.jdbc.sequence-connection-pool.non-jta-data-source" value="jdbc/SAMPLE_NON_JTA_DS" />                
+		<property name="javax.persistence.lock.timeout" value="2000" />
+        
+           <!--  Tell wildfly where it can find org.eclipse.persistence.jpa.PersistenceProvider, see WM6Maint-2318. -->                 
+           <property name="jboss.as.jpa.providerModule" value="company.org.eclipse.persistence:main" />
+		</properties>
+	</persistence-unit>            
+</persistence>
