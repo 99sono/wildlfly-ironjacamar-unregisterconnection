@@ -1,4 +1,4 @@
-# wildfly10-observe-on-success-stale-entity
+# IJ000311: Throwable from unregister connection: java.lang.IllegalStateException: IJ000152: Trying to return an unknown connection: org.jboss.jca.adapters.jdbc.jdk7.WrappedConnectionJDK7@2021ff6.
 
 ## Summary
 The issue is reported in jboss JIRA:
